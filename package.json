@@ -1,0 +1,56 @@
+{
+  "name": "erc20-token",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "repository": "https://github.com/hrharder/erc20-token",
+  "license": "MIT",
+  "private": false,
+  "author": {
+    "name": "Henry Harder",
+    "email": "henry@paradigm.market",
+    "url": "https://habsyr.dev"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "yarn start:snapshot && sleep 2 && yarn test:ci && yarn stop:snapshot",
+    "test:ci": "ts-mocha --exit test/*_test.ts",
+    "clean": "rm -rf node_modules dist",
+    "lint": "tslint -p .",
+    "lint:fix": "tslint -p . --fix",
+    "start:snapshot": "docker run -d --rm -p 8545:8545 --name zrx ${npm_package_config_image}",
+    "stop:snapshot": "docker kill zrx",
+    "docs": "typedoc ./src"
+  },
+  "config": {
+    "image": "gcr.io/zaidan-eth-net/0x-snapshot:0.2.1"
+  },
+  "dependencies": {
+    "@0x/abi-gen-wrappers": "^5.3.2",
+    "@0x/contract-addresses": "^3.1.0",
+    "@0x/utils": "^4.5.2",
+    "@0x/web3-wrapper": "^6.0.12"
+  },
+  "devDependencies": {
+    "@0x/contract-wrappers": "^12.1.0",
+    "@0x/types": "^2.4.3",
+    "@0x/typescript-typings": "^4.2.4",
+    "@types/mocha": "^5.2.7",
+    "@types/web3": "^1.0.19",
+    "ethereum-types": "^2.1.4",
+    "mocha": "^6.2.0",
+    "ts-mocha": "^6.0.0",
+    "tslint": "^5.20.0",
+    "typedoc": "^0.14.2",
+    "typedoc-plugin-markdown": "^2.0.1",
+    "typescript": "^3.5.3",
+    "web3": "^1.2.1"
+  },
+  "files": [
+    "dist/*.js",
+    "dist/*.js.map",
+    "dist/*.d.ts"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
