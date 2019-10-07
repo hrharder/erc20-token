@@ -3,7 +3,7 @@ import { ContractAddresses, getContractAddressesForNetworkOrThrow } from "@0x/co
 import { BigNumber } from "@0x/utils";
 import { Web3Wrapper } from "@0x/web3-wrapper";
 import assert from "assert";
-import { SupportedProvider, TxData, CallData } from "ethereum-types";
+import { CallData, SupportedProvider, TxData } from "ethereum-types";
 
 import { MAX_ALLOWANCE, normalizeAddress } from "./utils";
 
