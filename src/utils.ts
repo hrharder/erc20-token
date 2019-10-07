@@ -22,6 +22,6 @@ export const ETHEREUM_ADDRESS_REGEX_CHECKSUMMED = /^0x[a-fA-F0-9]{40}$/;
  * @param address A 20-byte address as a hex-encoded string.
  */
 export function normalizeAddress(address: string): string {
-    assert(ETHEREUM_ADDRESS_REGEX.test(address), "ERC20Token: invalid Ethereum address");
-    return address.toString();
+    assert(ETHEREUM_ADDRESS_REGEX_CHECKSUMMED.test(address), "invalid Ethereum address");
+    return address.toLowerCase();
 }
