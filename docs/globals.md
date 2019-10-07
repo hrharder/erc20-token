@@ -24,7 +24,7 @@
 
 • **ETHEREUM_ADDRESS_REGEX**: *RegExp* =  /^0x[a-f0-9]{40}$/
 
-Defined in utils.ts:12
+*Defined in [utils.ts:12](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/utils.ts#L12)*
 
 Matches Ethereum addresses (non-checksummed, all lowercase).
 
@@ -34,7 +34,7 @@ ___
 
 • **ETHEREUM_ADDRESS_REGEX_CHECKSUMMED**: *RegExp* =  /^0x[a-fA-F0-9]{40}$/
 
-Defined in utils.ts:17
+*Defined in [utils.ts:17](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/utils.ts#L17)*
 
 Matches all Ethereum addresses (checksummed, capital, or lowercase).
 
@@ -44,7 +44,7 @@ ___
 
 • **MAX_ALLOWANCE**: *BigNumber* =  new BigNumber(2).exponentiatedBy(256).minus(1)
 
-Defined in utils.ts:7
+*Defined in [utils.ts:7](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/utils.ts#L7)*
 
 Represents the maximum ERC-20 approval (maximum 256-bit unsigned integer).
 
@@ -54,7 +54,7 @@ Represents the maximum ERC-20 approval (maximum 256-bit unsigned integer).
 
 ▸ **normalizeAddress**(`address`: string): *string*
 
-Defined in utils.ts:24
+*Defined in [utils.ts:24](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/utils.ts#L24)*
 
 Validate address (checksummed or not) and return un-checksummed lowercase.
 

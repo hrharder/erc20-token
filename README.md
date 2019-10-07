@@ -20,10 +20,10 @@ Add to your project:
 
 ```bash
 # with yarn
-yarn add erc20-token
+yarn add @habsyr/erc20-token
 
 # with npm
-npm i --save erc20-token
+npm i --save @habsyr/erc20-token
 ```
 
 ### Import
@@ -31,12 +31,12 @@ See [`src/index.ts`](./src/index.ts) for all available exports.
 
 TypeScript/ES6+ (recommended):
 ```typescript
-import { ERC20Token, BigNumber, MAX_ALLOWANCE } from "erc20-token";
+import { ERC20Token, BigNumber, MAX_ALLOWANCE } from "@habsyr/erc20-token";
 ```
 
 CommonJS:
 ```js
-const { ERC20Token, BigNumber, MAX_ALLOWANCE } = require("erc20-token");
+const { ERC20Token, BigNumber, MAX_ALLOWANCE } = require("@habsyr/erc20-token");
 ```
 
 ### Initialize
@@ -44,7 +44,7 @@ const { ERC20Token, BigNumber, MAX_ALLOWANCE } = require("erc20-token");
 Instantiate a new `ERC20Token` instance with a supported Ethereum provider. Usage of `web3` is shown below, but any standard provider will work.
 
 ```typescript
-import { ERC20Token } from "erc20-token";
+import { ERC20Token } from "@habsyr/erc20-token";
 import Web3 from "web3";
 
 const web3 = new Web3("http://localhost:8545");

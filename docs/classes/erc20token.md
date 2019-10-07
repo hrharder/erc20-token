@@ -44,7 +44,7 @@ without needing to manually specify the asset proxy address.
 
 \+ **new ERC20Token**(`provider`: SupportedProvider, `callAndTxDefaults?`: Partial‹CallData›): *[ERC20Token](erc20token.md)*
 
-Defined in erc20_token.ts:30
+*Defined in [erc20_token.ts:30](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/erc20_token.ts#L30)*
 
 Create a new `ERC20Token` instance with a Web3 provider to access convenience
 methods for interacting with arbitrary ERC-20 tokens and the 0x ERC-20 asset
@@ -65,7 +65,7 @@ Name | Type | Description |
 
 ▪ **UNLIMITED_ALLOWANCE**: *BigNumber* =  new BigNumber(MAX_ALLOWANCE)
 
-Defined in erc20_token.ts:21
+*Defined in [erc20_token.ts:21](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/erc20_token.ts#L21)*
 
 ## Methods
 
@@ -73,7 +73,7 @@ Defined in erc20_token.ts:21
 
 ▸ **getAllowanceAsync**(`tokenAddress`: string, `userAddress`: string, `spenderAddress`: string): *Promise‹BigNumber›*
 
-Defined in erc20_token.ts:69
+*Defined in [erc20_token.ts:69](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/erc20_token.ts#L69)*
 
 Fetch user's ERC-20 allowance for a specific spender in base units (wei).
 
@@ -95,7 +95,7 @@ ___
 
 ▸ **getBalanceAsync**(`tokenAddress`: string, `userAddress`: string): *Promise‹BigNumber›*
 
-Defined in erc20_token.ts:55
+*Defined in [erc20_token.ts:55](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/erc20_token.ts#L55)*
 
 Fetch user's ERC-20 token balance in base units (wei).
 
@@ -116,7 +116,7 @@ ___
 
 ▸ **getNetworkIdAsync**(): *Promise‹number›*
 
-Defined in erc20_token.ts:206
+*Defined in [erc20_token.ts:206](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/erc20_token.ts#L206)*
 
 Fetch the current detected networkId.
 
@@ -128,7 +128,7 @@ ___
 
 ▸ **getProxyAddressAsync**(): *Promise‹string›*
 
-Defined in erc20_token.ts:214
+*Defined in [erc20_token.ts:214](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/erc20_token.ts#L214)*
 
 Fetch the 0x ERC-20 asset proxy address for the current network.
 
@@ -140,7 +140,7 @@ ___
 
 ▸ **getProxyAllowanceAsync**(`tokenAddress`: string, `userAddress`: string): *Promise‹BigNumber›*
 
-Defined in erc20_token.ts:83
+*Defined in [erc20_token.ts:83](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/erc20_token.ts#L83)*
 
 Fetch user's 0x ERC-20 proxy allowance for a given token in base units (wei).
 
@@ -161,7 +161,7 @@ ___
 
 ▸ **setAllowanceAsync**(`tokenAddress`: string, `spenderAddress`: string, `allowance`: BigNumber, `txOptions`: Partial‹TxData›): *Promise‹string›*
 
-Defined in erc20_token.ts:97
+*Defined in [erc20_token.ts:97](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/erc20_token.ts#L97)*
 
 Set user's 0x ERC-20 allowance for a given address in base units (wei).
 
@@ -184,7 +184,7 @@ ___
 
 ▸ **setProxyAllowanceAsync**(`tokenAddress`: string, `allowance`: BigNumber, `txOptions`: Partial‹TxData›): *Promise‹string›*
 
-Defined in erc20_token.ts:116
+*Defined in [erc20_token.ts:116](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/erc20_token.ts#L116)*
 
 Set user's 0x ERC-20 proxy allowance for a given token in base units (wei).
 
@@ -206,7 +206,7 @@ ___
 
 ▸ **setUnlimitedProxyAllowanceAsync**(`tokenAddress`: string, `txOptions`: Partial‹TxData›): *Promise‹string›*
 
-Defined in erc20_token.ts:138
+*Defined in [erc20_token.ts:138](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/erc20_token.ts#L138)*
 
 Set an unlimited allowance for the 0x ERC-20 proxy allowance for a given
 token and user address.
@@ -228,7 +228,7 @@ ___
 
 ▸ **transferAsync**(`tokenAddress`: string, `toAddress`: string, `amount`: BigNumber, `txOptions`: Partial‹TxData›): *Promise‹string›*
 
-Defined in erc20_token.ts:188
+*Defined in [erc20_token.ts:188](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/erc20_token.ts#L188)*
 
 Call the `transfer` method on an ERC20 token contract to transfer some
 amount of tokens.
@@ -252,7 +252,7 @@ ___
 
 ▸ **transferFromAsync**(`tokenAddress`: string, `toAddress`: string, `fromAddress`: string, `amount`: BigNumber, `txOptions`: Partial‹TxData›): *Promise‹string›*
 
-Defined in erc20_token.ts:160
+*Defined in [erc20_token.ts:160](https://github.com/hrharder/erc20-token/blob/7dc6c03/src/erc20_token.ts#L160)*
 
 Call the `transferFrom` method on an ERC20 token contract (allowance must
 be set for the spender).
