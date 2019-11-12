@@ -31,7 +31,9 @@
     "@0x/web3-wrapper": "^6.0.12"
   },
   "devDependencies": {
+    "@0x/contract-artifacts": "^2.2.2",
     "@0x/contract-wrappers": "^12.1.0",
+    "@0x/dev-utils": "^2.3.3",
     "@0x/types": "^2.4.3",
     "@0x/typescript-typings": "^4.2.4",
     "@types/mocha": "^5.2.7",
