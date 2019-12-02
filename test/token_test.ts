@@ -1,6 +1,6 @@
+import { DummyERC20TokenContract } from "@0x/abi-gen-wrappers";
 import { ContractWrappers } from "@0x/contract-wrappers";
 import { BigNumber } from "@0x/utils";
-import { DummyERC20TokenContract } from "@0x/abi-gen-wrappers";
 import assert from "assert";
 import Web3 from "web3";
 
@@ -50,8 +50,8 @@ describe("ERC20Token helper class tests", function (): void {
         networkId = await web3.eth.net.getId();
         accounts = await web3.eth.getAccounts();
 
-        contractWrappers = new ContractWrappers(web3.currentProvider, { networkId });
-        erc20ProxyAddress = contractWrappers.erc20Proxy.address;
+        contractWrappers = new ContractWrappers(web3.currentProvider, { chainId: networkId });
+        erc20ProxyAddress = contractWrappers.contractAddresses.erc20Proxy;
 
         address = accounts[parseInt(TEST_ACCOUNT_INDEX)];
 
@@ -73,7 +73,7 @@ describe("ERC20Token helper class tests", function (): void {
     });
 
     it("should have the correct network ID", async function (): Promise<void> {
-        const loadedId = await erc20.getNetworkIdAsync();
+        const loadedId = await erc20.getChainIdAsync();
         assert.strictEqual(loadedId, networkId, "network ID's should match");
     });
 
@@ -85,8 +85,8 @@ describe("ERC20Token helper class tests", function (): void {
         assert.strictEqual(balanceB.toString(), ZERO.toString(), "balance should be 0 before mint");
 
         // mint tokens for next assertions
-        await tokenA.mint.sendTransactionAsync(mintAmountA, { from: address });
-        await tokenB.mint.sendTransactionAsync(mintAmountB, { from: address });
+        await tokenA.mint(mintAmountA).sendTransactionAsync({ from: address });
+        await tokenB.mint(mintAmountB).sendTransactionAsync({ from: address });
     });
 
     it("should correctly fetch balances after mint", async function (): Promise<void> {

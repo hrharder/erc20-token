@@ -135,7 +135,7 @@ describe("Unit tests for exported classes, functions, and constants.", function 
 
                     const expected = new BigNumber(0);
                     const fromLibrary = await erc20Token.getBalanceAsync(tokenAddress, addresses[0]);
-                    const fromContract = await dummyTokenA.balanceOf.callAsync(userAddress);
+                    const fromContract = await dummyTokenA.balanceOf(userAddress).callAsync();
 
                     assert(expected.isEqualTo(fromLibrary), "balance from library should be zero");
                     assert(expected.isEqualTo(fromContract), "balance from contract wrapper should be zero");
@@ -146,10 +146,10 @@ describe("Unit tests for exported classes, functions, and constants.", function 
                     const mintValue = Web3Wrapper.toWei(new BigNumber(12));
 
                     // mint tokens
-                    await dummyTokenA.mint.awaitTransactionSuccessAsync(mintValue, { from: userAddress });
+                    await dummyTokenA.mint(mintValue).awaitTransactionSuccessAsync({ from: userAddress });
 
-                    const supplyAfterMint = await dummyTokenA.totalSupply.callAsync();
-                    const balanceFromToken = await dummyTokenA.balanceOf.callAsync(userAddress);
+                    const supplyAfterMint = await dummyTokenA.totalSupply().callAsync();
+                    const balanceFromToken = await dummyTokenA.balanceOf(userAddress).callAsync();
                     const balanceFromClass = await erc20Token.getBalanceAsync(tokenAddress, userAddress);
 
                     assert(supplyAfterMint.isEqualTo(mintValue), "total supply should match mint value");
@@ -162,9 +162,9 @@ describe("Unit tests for exported classes, functions, and constants.", function 
                     const mintValue = Web3Wrapper.toWei(new BigNumber(14));
 
                     // mint tokens
-                    await dummyTokenA.mint.awaitTransactionSuccessAsync(mintValue, { from: userAddress });
+                    await dummyTokenA.mint(mintValue).awaitTransactionSuccessAsync({ from: userAddress });
 
-                    const balanceFromToken = await dummyTokenA.balanceOf.callAsync(userAddress);
+                    const balanceFromToken = await dummyTokenA.balanceOf(userAddress).callAsync();
                     const balanceFromClass = await erc20Token.getBalanceAsync(tokenAddress, userAddress);
 
                     assert(mintValue.isEqualTo(balanceFromToken), "balance from wrapper should match mint value");
