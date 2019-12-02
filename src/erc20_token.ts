@@ -1,5 +1,5 @@
 import { ERC20TokenContract } from "@0x/abi-gen-wrappers";
-import { ContractAddresses, getContractAddressesForNetworkOrThrow } from "@0x/contract-addresses";
+import { ContractAddresses, getContractAddressesForChainOrThrow } from "@0x/contract-addresses";
 import { BigNumber } from "@0x/utils";
 import { Web3Wrapper } from "@0x/web3-wrapper";
 import assert from "assert";
@@ -25,7 +25,7 @@ export class ERC20Token {
     private readonly _provider: SupportedProvider;
     private readonly _web3: Web3Wrapper;
 
-    private _networkId: number;
+    private _chainId: number;
     private _zrxAddresses: ContractAddresses;
     private _erc20ProxyAddress: string;
 
@@ -55,7 +55,7 @@ export class ERC20Token {
     public async getBalanceAsync(tokenAddress: string, userAddress: string): Promise<BigNumber> {
         const token = this.getTokenContract(tokenAddress);
         const user = normalizeAddress(userAddress);
-        return token.balanceOf.callAsync(user);
+        return token.balanceOf(user).callAsync();
     }
 
     /**
@@ -70,7 +70,7 @@ export class ERC20Token {
         const user = normalizeAddress(userAddress);
         const spender = normalizeAddress(spenderAddress);
         const token = this.getTokenContract(tokenAddress);
-        return token.allowance.callAsync(user, spender);
+        return token.allowance(user, spender).callAsync();
     }
 
     /**
@@ -92,6 +92,7 @@ export class ERC20Token {
      * @param spenderAddress The address of the desired spender to set allowance for.
      * @param allowance The desired allowance (in wei) to set for the ERC-20 proxy.
      * @param txOptions Optional transaction options (gas price, etc).
+     * @param shouldValidate Optionally skip validation by passing `false` (default `true`).
      * @returns A promise that resolves to the resulting transaction hash (TX ID).
      */
     public async setAllowanceAsync(
@@ -99,10 +100,11 @@ export class ERC20Token {
         spenderAddress: string,
         allowance: BigNumber,
         txOptions: Partial<TxData> = {},
+        shouldValidate: boolean = true,
     ): Promise<string> {
         const token = this.getTokenContract(tokenAddress);
         const spender = normalizeAddress(spenderAddress);
-        return token.approve.validateAndSendTransactionAsync(spender, allowance, txOptions);
+        return token.approve(spender, allowance).sendTransactionAsync(txOptions, { shouldValidate });
     }
 
     /**
@@ -111,12 +113,14 @@ export class ERC20Token {
      * @param tokenAddress The ERC-20 token contract address.
      * @param allowance The desired allowance (in wei) to set for the ERC-20 proxy.
      * @param txOptions Optional transaction options (gas price, etc).
+     * @param shouldValidate Optionally skip validation by passing `false` (default `true`).
      * @returns A promise that resolves to the resulting transaction hash (TX ID).
      */
     public async setProxyAllowanceAsync(
         tokenAddress: string,
         allowance: BigNumber,
         txOptions: Partial<TxData> = {},
+        shouldValidate: boolean = true,
     ): Promise<string> {
         const proxyAddress = await this.getProxyAddressAsync();
         return this.setAllowanceAsync(
@@ -124,6 +128,7 @@ export class ERC20Token {
             proxyAddress,
             allowance,
             txOptions,
+            shouldValidate,
         );
     }
 
@@ -133,16 +138,19 @@ export class ERC20Token {
      *
      * @param tokenAddress The ERC-20 token contract address.
      * @param txOptions Optional transaction options (gas price, etc).
+     * @param shouldValidate Optionally skip validation by passing `false` (default `true`).
      * @returns A promise that resolves to the resulting transaction hash (TX ID).
      */
     public async setUnlimitedProxyAllowanceAsync(
         tokenAddress: string,
         txOptions: Partial<TxData> = {},
+        shouldValidate: boolean = true,
     ): Promise<string> {
         return this.setProxyAllowanceAsync(
             tokenAddress,
             ERC20Token.UNLIMITED_ALLOWANCE,
             txOptions,
+            shouldValidate,
         );
     }
 
@@ -155,6 +163,7 @@ export class ERC20Token {
      * @param fromAddress The spender address (must be approved).
      * @param amount The amount to transfer in base units (wei).
      * @param txOptions Optional transaction options (gas price, etc).
+     * @param shouldValidate Optionally skip validation by passing `false` (default `true`).
      * @returns A promise that resolves to the resulting transaction hash (TX ID).
      */
     public async transferFromAsync(
@@ -163,16 +172,12 @@ export class ERC20Token {
         fromAddress: string,
         amount: BigNumber,
         txOptions: Partial<TxData> = {},
+        shouldValidate: boolean = true,
     ): Promise<string> {
         const token = await this.getTokenContract(tokenAddress);
         const to = normalizeAddress(toAddress);
         const from = normalizeAddress(fromAddress);
-        return token.transferFrom.validateAndSendTransactionAsync(
-            from,
-            to,
-            amount,
-            txOptions,
-        );
+        return token.transferFrom(from, to, amount).sendTransactionAsync(txOptions, { shouldValidate });
     }
 
     /**
@@ -183,6 +188,7 @@ export class ERC20Token {
      * @param toAddress The address to transfer assets to (receiver).
      * @param amount The amount to transfer in base units (wei).
      * @param txOptions Optional transaction options (gas price, etc).
+     * @param shouldValidate Optionally skip validation by passing `false` (default `true`).
      * @returns A promise that resolves to the resulting transaction hash (TX ID).
      */
     public async transferAsync(
@@ -190,22 +196,19 @@ export class ERC20Token {
         toAddress: string,
         amount: BigNumber,
         txOptions: Partial<TxData> = {},
+        shouldValidate: boolean = true,
     ): Promise<string> {
         const token = await this.getTokenContract(tokenAddress);
         const to = normalizeAddress(toAddress);
-        return token.transfer.validateAndSendTransactionAsync(
-            to,
-            amount,
-            txOptions,
-        );
+        return token.transfer(to, amount).sendTransactionAsync(txOptions, { shouldValidate });
     }
 
     /**
-     * Fetch the current detected networkId.
+     * Fetch the current detected chain ID.
      */
-    public async getNetworkIdAsync(): Promise<number> {
+    public async getChainIdAsync(): Promise<number> {
         await this._initializing;
-        return this._networkId;
+        return this._chainId;
     }
 
     /**
@@ -220,8 +223,8 @@ export class ERC20Token {
      * Load network ID from provider and configured Ox contract addresses.
      */
     private async initialize(): Promise<void> {
-        this._networkId = await this._web3.getNetworkIdAsync();
-        this._zrxAddresses = getContractAddressesForNetworkOrThrow(this._networkId);
+        this._chainId = await this._web3.getChainIdAsync();
+        this._zrxAddresses = getContractAddressesForChainOrThrow(this._chainId);
         this._erc20ProxyAddress = this._zrxAddresses.erc20Proxy;
     }
 
