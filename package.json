@@ -1,6 +1,6 @@
 {
   "name": "@habsyr/erc20-token",
-  "version": "0.2.1",
+  "version": "0.3.0-beta.0",
   "main": "dist/index.js",
   "repository": "https://github.com/hrharder/erc20-token",
   "license": "MIT",
@@ -22,23 +22,23 @@
     "docs": "typedoc ./src"
   },
   "config": {
-    "image": "gcr.io/zaidan-eth-net/0x-snapshot:0.2.1"
+    "image": "gcr.io/zaidan-eth-net/0x-snapshot:v3"
   },
   "dependencies": {
-    "@0x/abi-gen-wrappers": "^5.3.2",
-    "@0x/contract-addresses": "^3.1.0",
-    "@0x/utils": "^4.5.2",
-    "@0x/web3-wrapper": "^6.0.12"
+    "@0x/abi-gen-wrappers": "^5.4.0-beta.3",
+    "@0x/contract-addresses": "^3.3.0-beta.5",
+    "@0x/utils": "^4.6.0-beta.3",
+    "@0x/web3-wrapper": "^6.1.0-beta.3"
   },
   "devDependencies": {
-    "@0x/contract-artifacts": "^2.2.2",
-    "@0x/contract-wrappers": "^12.1.0",
-    "@0x/dev-utils": "^2.3.3",
-    "@0x/types": "^2.4.3",
-    "@0x/typescript-typings": "^4.2.4",
+    "@0x/contract-artifacts": "^2.3.0-beta.4",
+    "@0x/contract-wrappers": "^12.2.0-beta.4",
+    "@0x/dev-utils": "^2.4.0-beta.4",
+    "@0x/types": "^2.5.0-beta.3",
+    "@0x/typescript-typings": "^4.4.0-beta.2",
     "@types/mocha": "^5.2.7",
     "@types/web3": "^1.0.19",
-    "ethereum-types": "^2.1.4",
+    "ethereum-types": "^2.2.0-beta.2",
     "mocha": "^6.2.0",
     "ts-mocha": "^6.0.0",
     "tslint": "^5.20.0",
